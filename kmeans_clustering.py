@@ -8,6 +8,7 @@ Code out kmeans clustering algo
   3. Compute new cluster centroids
   4. Repeat 2-3 until convergence (when cluster centroids are same as
      last iter)
+O(n * k * max_iter)
 '''
 
 
