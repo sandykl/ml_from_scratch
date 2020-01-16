@@ -11,7 +11,7 @@ Code out kmeans clustering algo
 '''
 
 
-def kmeans(dat, K, seed=0):
+def kmeans(dat, K, seed=0, max_iter=20):
     '''
     Input:
         dat = N x M numerical matrix (numpy 2D array)
@@ -24,12 +24,13 @@ def kmeans(dat, K, seed=0):
     N, M = dat.shape
 
     # Randomly choose initial centroids
-    centroids_last = np.array([dat[i] for i in np.random.randint(0, N, K)])
+    centroids_last = np.random.permutation(dat)[:K]
 
     converged = False
     num_iter = 0
 
-    '''Compute Euclidean distance for 1 cluster centroid
+    '''
+    (SLOWER) Compute Euclidean distance for 1 cluster centroid
     dist = []
     for i in range(N):
         diff = dat[i] - centroids[0]
@@ -53,6 +54,11 @@ def kmeans(dat, K, seed=0):
         converged = (centroids_last == centroids_next).all()
         centroids_last = centroids_next
         num_iter += 1
+
+        if num_iter == max_iter:
+            print('Did not converge at max number of iterations: {}'.format(
+                max_iter))
+            return(centroids_next, clust_nums)
 
     print('Took {} iterations until convergence'.format(num_iter))
 
