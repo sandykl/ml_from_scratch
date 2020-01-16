@@ -17,7 +17,8 @@ def kmeans(dat, K, seed=0):
         dat = N x M numerical matrix (numpy 2D array)
         K = the number of desired clusters
     Output:
-        clusters: an K x M matrix representing cluster centers
+        clust_centers: an K x M matrix representing cluster centers
+        clust_assignments: 1D array of length N of cluster assignments
     '''
     np.random.seed(seed)
     N, M = dat.shape
@@ -55,4 +56,4 @@ def kmeans(dat, K, seed=0):
 
     print('Took {} iterations until convergence'.format(num_iter))
 
-    return(centroids_next)
+    return(centroids_next, clust_nums)
